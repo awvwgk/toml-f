@@ -116,3 +116,40 @@ jobs:
         pushd _build
         ctest
         popd
+
+  flang-build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-20.04]
+
+    env:
+      FC: flang
+      OMP_NUM_THREADS: 2,1
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - uses: actions/setup-python@v1
+      with:
+        python-version: '3.x'
+
+    - name: Install flang compiler
+      run: |
+        sudo apt-get install flang
+
+    - name: Install meson/cmake
+      run: pip3 install meson cmake ninja
+
+    - name: Configure meson build
+      run: meson setup build
+
+    - name: Build library (meson)
+      run: meson compile -C build
+
+    - run: |
+       flang toml_test.f90 -Mbackslash -g -O0
+       ./a.out
+       LD_PRELOAD=/lib/libSegfault.so ./a.out
