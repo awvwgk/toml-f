@@ -11,7 +11,7 @@ jobs:
 
     env:
       FC: gfortran
-      GCC_V: 9
+      GCC_V: 8
       OMP_NUM_THREADS: 2,1
 
     steps:
