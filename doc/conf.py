@@ -29,6 +29,7 @@ extensions = [
     "sphinx_copybutton",
     "sphinx.ext.intersphinx",
     "sphinxcontrib_ansi",
+    "sphinx_ford",
 ]
 
 html_theme = "sphinx_book_theme"
@@ -70,5 +71,8 @@ locale_dirs = ["locales"]
 copybutton_selector = "div:not(.no-copybutton) > div.highlight > pre"
 blog_path = "news/index"
 blog_post_pattern = "news/**"
+
+ford_project_file = op.abspath(op.join(op.dirname(__file__), "..", "docs.md"))
+ford_export_modules_json = True
 
 master_doc = "index"

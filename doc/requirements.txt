@@ -2,3 +2,4 @@ ablog
 sphinx-book-theme~=1.0.0
 sphinx-copybutton
 sphinx-design
+sphinx-ford[auto]
